@@ -4,16 +4,16 @@
     {
         IWorkflowResult StartNewInstance(string workflowCode, object flowData);
 
-        IWorkflowResult ApproveWorkflow(string workflowCode, object flowData);
-        
-        IWorkflowResult RejectWorkflow(string workflowCode, object flowData);
+        IWorkflowResult ApproveWorkflow(int flowStateId, string workflowCode, object flowData);
 
-        IWorkflowResult ExecuteCustomWorkflowAction(string workflowCode, string actionCode, object flowData);
+        IWorkflowResult RejectWorkflow(int flowStateId, string workflowCode, object flowData);
 
-        IWorkflowResult CancelWorkflow(string workflowCode, object flowData);
-        
-        IWorkflowResult SuspendWorkflow(string workflowCode, object flowData);
-        
-        IWorkflowResult ResumeWorkflow(string workflowCode, object flowData);
+        IWorkflowResult ExecuteCustomWorkflowAction(int flowStateId, string workflowCode, string actionCode, object flowData);
+
+        IWorkflowResult CancelWorkflow(int flowStateId, string workflowCode, object flowData);
+
+        IWorkflowResult SuspendWorkflow(int flowStateId, string workflowCode, object flowData);
+
+        IWorkflowResult ResumeWorkflow(int flowStateId, string workflowCode, object flowData);
     }
 }

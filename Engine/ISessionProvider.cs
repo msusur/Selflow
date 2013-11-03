@@ -2,5 +2,6 @@
 {
     public interface ISessionProvider
     {
+        WorkflowContext CurrentWorkflowContext { get; set; }
     }
 }

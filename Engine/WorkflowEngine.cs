@@ -13,37 +13,58 @@
 
         public IWorkflowResult StartNewInstance(string workflowCode, object flowData)
         {
+            WorkflowDefinition definition = _flowRepository.GetFlowDefinitionByCode(workflowCode);
+            WorkflowContext context = ContextBuilder.Build(workflowCode, flowData, _sessionProvider, definition);
             throw new System.NotImplementedException();
         }
 
-        public IWorkflowResult ApproveWorkflow(string workflowCode, object flowData)
+        public IWorkflowResult ApproveWorkflow(int flowStateId, string workflowCode, object flowData)
         {
             throw new System.NotImplementedException();
         }
 
-        public IWorkflowResult RejectWorkflow(string workflowCode, object flowData)
+        public IWorkflowResult RejectWorkflow(int flowStateId, string workflowCode, object flowData)
         {
             throw new System.NotImplementedException();
         }
 
-        public IWorkflowResult ExecuteCustomWorkflowAction(string workflowCode, string actionCode, object flowData)
+        public IWorkflowResult ExecuteCustomWorkflowAction(int flowStateId, string workflowCode, string actionCode, object flowData)
         {
             throw new System.NotImplementedException();
         }
 
-        public IWorkflowResult CancelWorkflow(string workflowCode, object flowData)
+        public IWorkflowResult CancelWorkflow(int flowStateId, string workflowCode, object flowData)
         {
             throw new System.NotImplementedException();
         }
 
-        public IWorkflowResult SuspendWorkflow(string workflowCode, object flowData)
+        public IWorkflowResult SuspendWorkflow(int flowStateId, string workflowCode, object flowData)
         {
             throw new System.NotImplementedException();
         }
 
-        public IWorkflowResult ResumeWorkflow(string workflowCode, object flowData)
+        public IWorkflowResult ResumeWorkflow(int flowStateId, string workflowCode, object flowData)
         {
             throw new System.NotImplementedException();
+        }
+    }
+
+    public class WorkflowDefinition
+    {
+    }
+
+    public class WorkflowContext
+    {
+    }
+
+    public class ContextBuilder
+    {
+        public static WorkflowContext Build(string workflowCode, object flowData, ISessionProvider sessionProvider, WorkflowDefinition definition)
+        {
+            return sessionProvider.CurrentWorkflowContext = new WorkflowContext
+                   {
+            
+                   };
         }
     }
 }
