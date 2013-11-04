@@ -2,7 +2,7 @@
 {
     public class ResultBuilder
     {
-        public static WorkflowResult BuildResult(WorkflowContext context)
+        public static WorkflowResult BuildResult(WorkflowContext context, WorkflowStatus status)
         {
             return new WorkflowResult();
         }

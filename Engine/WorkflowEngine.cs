@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Selflow.Engine.Abstraction;
 using Selflow.Engine.Elements;
 using Selflow.Engine.Exceptions;
@@ -32,15 +31,27 @@ namespace Selflow.Engine
             {
                 throw new CannotStartWorkflowInstanceException("Start element not found.");
             }
-            IWorkflowElement currentElement = definition.GetElementById(startElement.ToElement);
+            var currentElements = definition.GetElementByIds(startElement.ToElements);
 
-            if (currentElement == null)
+            if (currentElements == null)
             {
-                throw new ElementNotFoundException(startElement.ToElement);
+                throw new ElementNotFoundException(startElement.ToElements);
             }
+            context.CurrentElements = currentElements;
+            
+            WorkflowStatus status = ExecuteElement(context);
 
+            _flowRepository.SaveStatus(status);
 
-            return ResultBuilder.BuildResult(context);
+            return ResultBuilder.BuildResult(context, status);
+        }
+
+        private static WorkflowStatus ExecuteElement(WorkflowContext context)
+        {
+            //TODO: recursively traverse the given current elements. All elements should be executed in one time.
+            //      So first an execution plan must be calculated then executed at the same time.
+            //      this is designed to be genericly runned by the other methods also.
+            return new WorkflowStatus(); //returns the current workflow status. Which is all executed elements and paths. 
         }
 
         public WorkflowResult ApproveWorkflow(int flowStateId, string workflowCode, object flowData)
@@ -72,5 +83,9 @@ namespace Selflow.Engine
         {
             throw new System.NotImplementedException();
         }
+    }
+
+    public class WorkflowStatus
+    {
     }
 }

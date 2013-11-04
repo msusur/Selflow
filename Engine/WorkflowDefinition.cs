@@ -15,7 +15,7 @@ namespace Selflow.Engine
             return WorkflowElements.Where(element => element is StartElement).Cast<StartElement>();
         }
 
-        public IWorkflowElement GetElementById(string toElement)
+        public IEnumerable<IWorkflowElement> GetElementByIds(IList<string> toElement)
         {
             return
                 WorkflowElements.FirstOrDefault(

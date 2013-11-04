@@ -3,5 +3,6 @@
     public interface IWorkflowRepository
     {
         WorkflowDefinition GetFlowDefinitionByCode(string workflowCode);
+        void SaveStatus(WorkflowStatus status);
     }
 }
