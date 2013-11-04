@@ -1,6 +1,6 @@
 ﻿namespace Selflow.Engine
 {
-    public class WorkflowResult : IWorkflowResult
+    public class WorkflowResult
     {
         public int WorkflowInstanceId { get; set; }
 
