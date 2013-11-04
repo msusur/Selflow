@@ -1,4 +1,6 @@
-﻿namespace Selflow.Engine
+﻿using Selflow.Engine.Abstraction;
+
+namespace Selflow.Engine
 {
     public class ContextBuilder
     {
@@ -6,6 +8,8 @@
         {
             return sessionProvider.CurrentWorkflowContext = new WorkflowContext
                                                             {            
+                                                                Definition = definition,
+                                                                Data = flowData
                                                             };
         }
     }

@@ -4,7 +4,7 @@
     {
         public static WorkflowResult BuildResult(WorkflowContext context)
         {
-            return new WorkflowResult()
+            return new WorkflowResult();
         }
     }
 }

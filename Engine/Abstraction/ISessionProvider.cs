@@ -1,4 +1,4 @@
-﻿namespace Selflow.Engine
+﻿namespace Selflow.Engine.Abstraction
 {
     public interface ISessionProvider
     {
