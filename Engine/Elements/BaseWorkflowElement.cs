@@ -7,8 +7,6 @@ namespace Selflow.Engine.Elements
     {
         public IList<string> ToElements { get; set; }
 
-        public IElementCondition ElementCondition { get; set; }
-
         public string ElementCode { get; set; }
     }
 }

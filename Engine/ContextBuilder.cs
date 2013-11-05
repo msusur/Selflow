@@ -1,4 +1,5 @@
 ﻿using Selflow.Engine.Abstraction;
+using Selflow.Engine.Entities;
 
 namespace Selflow.Engine
 {

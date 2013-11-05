@@ -4,7 +4,7 @@ using System.Linq;
 using Selflow.Engine.Abstraction;
 using Selflow.Engine.Elements;
 
-namespace Selflow.Engine
+namespace Selflow.Engine.Entities
 {
     public class WorkflowDefinition
     {
@@ -15,11 +15,10 @@ namespace Selflow.Engine
             return WorkflowElements.Where(element => element is StartElement).Cast<StartElement>();
         }
 
-        public IEnumerable<IWorkflowElement> GetElementByIds(IList<string> toElement)
+        public IEnumerable<IWorkflowElement> GetElementByIds(IList<string> toElements)
         {
-            return
-                WorkflowElements.FirstOrDefault(
-                    element => element.ElementCode.Equals(toElement, StringComparison.CurrentCultureIgnoreCase));
+            return WorkflowElements
+                .Where(element => toElements.Any(s => s.Equals(element.ElementCode, StringComparison.CurrentCultureIgnoreCase)));
         }
     }
 }

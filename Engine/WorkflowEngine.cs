@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Selflow.Engine.Abstraction;
 using Selflow.Engine.Elements;
+using Selflow.Engine.Entities;
 using Selflow.Engine.Exceptions;
 
 namespace Selflow.Engine
@@ -9,12 +12,14 @@ namespace Selflow.Engine
     {
         private readonly IWorkflowRepository _flowRepository;
         private readonly ISessionProvider _sessionProvider;
+        private readonly IWorkflowExecutionHelper _executionHelper;
         private readonly IRuleEngine _ruleEngine;
 
-        public WorkflowEngine(IWorkflowRepository flowRepository, ISessionProvider sessionProvider, IRuleEngine ruleEngine)
+        public WorkflowEngine(IWorkflowRepository flowRepository, ISessionProvider sessionProvider, IWorkflowExecutionHelper executionHelper, IRuleEngine ruleEngine)
         {
             _flowRepository = flowRepository;
             _sessionProvider = sessionProvider;
+            _executionHelper = executionHelper;
             _ruleEngine = ruleEngine;
         }
 
@@ -38,21 +43,15 @@ namespace Selflow.Engine
                 throw new ElementNotFoundException(startElement.ToElements);
             }
             context.CurrentElements = currentElements;
-            
-            WorkflowStatus status = ExecuteElement(context);
+
+            WorkflowStatus status = _executionHelper.ExecuteElement(context);
 
             _flowRepository.SaveStatus(status);
 
             return ResultBuilder.BuildResult(context, status);
         }
 
-        private static WorkflowStatus ExecuteElement(WorkflowContext context)
-        {
-            //TODO: recursively traverse the given current elements. All elements should be executed in one time.
-            //      So first an execution plan must be calculated then executed at the same time.
-            //      this is designed to be genericly runned by the other methods also.
-            return new WorkflowStatus(); //returns the current workflow status. Which is all executed elements and paths. 
-        }
+        
 
         public WorkflowResult ApproveWorkflow(int flowStateId, string workflowCode, object flowData)
         {
@@ -85,7 +84,8 @@ namespace Selflow.Engine
         }
     }
 
-    public class WorkflowStatus
+    public interface IWorkflowExecutionHelper
     {
+        WorkflowStatus ExecuteElement(WorkflowContext context);
     }
 }

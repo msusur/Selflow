@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Selflow.Engine.Abstraction;
 
-namespace Selflow.Engine
+namespace Selflow.Engine.Entities
 {
     public class WorkflowContext
     {

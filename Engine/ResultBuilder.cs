@@ -1,4 +1,6 @@
-﻿namespace Selflow.Engine
+﻿using Selflow.Engine.Entities;
+
+namespace Selflow.Engine
 {
     public class ResultBuilder
     {
